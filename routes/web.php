@@ -6,10 +6,15 @@ use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\User\AddressController;
 use App\Http\Controllers\User\DashboardController;
 use App\Http\Controllers\User\ProfileController;
+use App\Http\Controllers\CompanyProfileController; // Tambahan untuk mengimpor CompanyProfileController
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('welcome');
+// Rute Rijal: Frontend & Company Profile
+Route::controller(CompanyProfileController::class)->group(function () {
+    Route::get('/', 'index')->name('home');
+    Route::get('/tentang-kami', 'about')->name('about');
+    Route::get('/visi-misi', 'vision')->name('vision');
+    Route::get('/kontak', 'contact')->name('contact');
 });
 
 Route::middleware('guest')->group(function (): void {
