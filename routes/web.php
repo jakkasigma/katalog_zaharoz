@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\Auth\AuthenticatedSessionController as AdminAuthController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\User\AddressController;
@@ -30,4 +31,17 @@ Route::middleware('auth')->group(function (): void {
     Route::patch('/profile/password', [ProfileController::class, 'updatePassword'])->name('profile.password.update');
 
     Route::resource('addresses', AddressController::class)->except(['show']);
+});
+
+Route::prefix('admin')->name('admin.')->group(function (): void {
+    Route::get('/login', [AdminAuthController::class, 'create'])->name('login');
+    Route::post('/login', [AdminAuthController::class, 'store'])->name('login.store');
+
+    Route::middleware('admin')->group(function (): void {
+        Route::post('/logout', [AdminAuthController::class, 'destroy'])->name('logout');
+
+        Route::get('/dashboard', function () {
+            return view('admin.dashboard');
+        })->name('dashboard');
+    });
 });
