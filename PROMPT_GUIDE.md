@@ -276,6 +276,7 @@ Baca file ini dulu:
 - DESIGN_SYSTEM.md
 - tugas_anggota.md
 - workflow.md
+- GIT_TUTORIAL.md
 - resources/css/app.css
 - resources/views/components/ (semua file)
 - resources/views/layouts/ (layout yang sudah ada)
