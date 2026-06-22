@@ -5,6 +5,7 @@ namespace App\Models;
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Database\Factories\UserFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
@@ -21,6 +22,8 @@ class User extends Authenticatable
     protected $fillable = [
         'name',
         'email',
+        'phone',
+        'profile_photo_path',
         'password',
     ];
 
@@ -33,6 +36,14 @@ class User extends Authenticatable
         'password',
         'remember_token',
     ];
+
+    /**
+     * @return HasMany<Address, $this>
+     */
+    public function addresses(): HasMany
+    {
+        return $this->hasMany(Address::class);
+    }
 
     /**
      * Get the attributes that should be cast.

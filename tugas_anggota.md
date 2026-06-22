@@ -1,5 +1,7 @@
 # Pembagian Tugas Tim (5 Orang)
 
+> Catatan desain: Semua anggota wajib mengikuti `DESIGN_SYSTEM.md` dan memakai Blade components di `resources/views/components` agar tampilan konsisten.
+
 ## Anggota 1 - Frontend & Company Profile
 
 ### Tanggung Jawab
@@ -22,30 +24,30 @@
 
 ---
 
-## Anggota 2 - Modul User & Authentication
+## Anggota 2 (virgi)- Modul User & Authentication ✅ SELESAI
 
 ### Tanggung Jawab
 
-* Registrasi User
-* Login User
-* Logout User
-* Middleware User
-* Profil User
-* Edit Profil
-* Ganti Password
-* Kelola Alamat Pengiriman
+* [x] Registrasi User
+* [x] Login User
+* [x] Logout User
+* [x] Middleware User
+* [x] Profil User
+* [x] Edit Profil
+* [x] Ganti Password
+* [x] Kelola Alamat Pengiriman + Map Picker
 
 ### Database
 
-* users
-* user_profiles
-* addresses
+* [x] users
+* [x] user_profiles — digabung ke tabel `users` (`phone`, `profile_photo_path`) agar tidak duplikasi data profil
+* [x] addresses
 
 ### Output
 
-* Sistem autentikasi
-* Dashboard User
-* Manajemen Profil
+* [x] Sistem autentikasi
+* [x] Dashboard User
+* [x] Manajemen Profil
 
 ---
 

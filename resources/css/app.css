@@ -6,6 +6,79 @@
 @source '../**/*.js';
 
 @theme {
-    --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
-        'Segoe UI Symbol', 'Noto Color Emoji';
+    --font-sans: 'Inter', ui-sans-serif, system-ui, sans-serif;
+    --font-display: 'Viaoda Libre', ui-serif, Georgia, serif;
+    --font-serif: 'Cinzel', ui-serif, Georgia, serif;
+    --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, monospace;
+
+    --color-background: #000000;
+    --color-foreground: #f7f2f2;
+    --color-card: #111114;
+    --color-card-foreground: #f7f2f2;
+    --color-primary: #9f1239;
+    --color-primary-foreground: #fff1f2;
+    --color-secondary: #1f1f24;
+    --color-secondary-foreground: #f7f2f2;
+    --color-muted: #1f1f24;
+    --color-muted-foreground: #a1a1aa;
+    --color-accent: #e11d48;
+    --color-accent-foreground: #fff1f2;
+    --color-destructive: #dc2626;
+    --color-border: #3f3f46;
+    --color-input: #27272a;
+    --color-ring: #fb7185;
+
+    --color-ink: #000000;
+    --color-night: #111114;
+    --color-lens: #e11d48;
+    --color-brass: #f7f2f2;
+    --color-mist: #000000;
+    --color-glass: #3f3f46;
+
+    --radius-card: 0rem;
+    --radius-control: 0rem;
+    --radius-pill: 0rem;
+}
+
+:root {
+    --background: #000000;
+    --foreground: #f7f2f2;
+    --card: #111114;
+    --card-foreground: #f7f2f2;
+    --popover: #111114;
+    --popover-foreground: #f7f2f2;
+    --primary: #9f1239;
+    --primary-foreground: #fff1f2;
+    --secondary: #1f1f24;
+    --secondary-foreground: #f7f2f2;
+    --muted: #1f1f24;
+    --muted-foreground: #a1a1aa;
+    --accent: #e11d48;
+    --accent-foreground: #fff1f2;
+    --destructive: #dc2626;
+    --border: #3f3f46;
+    --input: #27272a;
+    --ring: #fb7185;
+    --radius: 0rem;
+}
+
+.dark {
+    --background: #000000;
+    --foreground: #f7f2f2;
+    --card: #111114;
+    --card-foreground: #f7f2f2;
+    --popover: #111114;
+    --popover-foreground: #f7f2f2;
+    --primary: #e11d48;
+    --primary-foreground: #fff1f2;
+    --secondary: #1f1f24;
+    --secondary-foreground: #f7f2f2;
+    --muted: #1f1f24;
+    --muted-foreground: #a1a1aa;
+    --accent: #fb7185;
+    --accent-foreground: #000000;
+    --destructive: #f87171;
+    --border: rgb(255 255 255 / 14%);
+    --input: rgb(255 255 255 / 16%);
+    --ring: #fb7185;
 }

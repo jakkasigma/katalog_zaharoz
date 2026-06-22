@@ -51,21 +51,21 @@ Pesanan Selesai
 
 ## Hak Akses User
 
-* Registrasi akun
-* Login
-* Mengelola profil
-* Mengelola alamat pengiriman
-* Melihat katalog produk
-* Mencari produk
-* Menambahkan produk ke keranjang
-* Melakukan checkout
-* Upload bukti transfer
-* Melihat status pesanan
-* Melihat riwayat transaksi
+* [x] Registrasi akun
+* [x] Login
+* [x] Mengelola profil
+* [x] Mengelola alamat pengiriman
+* [ ] Melihat katalog produk
+* [ ] Mencari produk
+* [ ] Menambahkan produk ke keranjang
+* [ ] Melakukan checkout
+* [ ] Upload bukti transfer
+* [ ] Melihat status pesanan
+* [ ] Melihat riwayat transaksi
 
 ---
 
-## Workflow Registrasi
+## Workflow Registrasi ✅ SELESAI
 
 ```text
 Masuk Website
@@ -91,7 +91,7 @@ Akun Berhasil Dibuat
 
 ---
 
-## Workflow Login
+## Workflow Login ✅ SELESAI
 
 ```text
 Masuk Website
@@ -108,7 +108,7 @@ Dashboard User
 
 ---
 
-## Workflow Kelola Profil
+## Workflow Kelola Profil ✅ SELESAI
 
 ```text
 Dashboard User
@@ -128,7 +128,7 @@ Simpan Perubahan
 
 ---
 
-## Workflow Kelola Alamat Pengiriman
+## Workflow Kelola Alamat Pengiriman ✅ SELESAI
 
 ```text
 Dashboard User
@@ -146,8 +146,10 @@ Tambah Alamat
     ├─ Kecamatan
     ├─ Kode Pos
     ├─ Alamat Lengkap
-    ├─ Latitude
-    └─ Longitude
+    ├─ Pilih Lokasi dari Peta
+    ├─ Gunakan Lokasi Saya
+    ├─ Latitude otomatis
+    └─ Longitude otomatis
     │
     ▼
 Simpan Alamat
@@ -164,8 +166,9 @@ Simpan Alamat
 | Kecamatan      | Lokasi kecamatan        |
 | Kode Pos       | Kode wilayah pengiriman |
 | Alamat Lengkap | Detail alamat           |
-| Latitude       | Koordinat lokasi        |
-| Longitude      | Koordinat lokasi        |
+| Latitude       | Koordinat lokasi dari map picker |
+| Longitude      | Koordinat lokasi dari map picker |
+| Default        | Penanda alamat utama untuk checkout nanti |
 
 ---
 
