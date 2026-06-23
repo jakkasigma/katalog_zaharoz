@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Order;
 use App\Models\Payment;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -18,7 +19,14 @@ class PaymentFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'order_id' => Order::factory(),
+            'amount' => fake()->randomFloat(2, 100000, 600000),
+            'method' => 'transfer',
+            'proof_path' => null,
+            'status' => fake()->randomElement(['pending', 'verified', 'rejected']),
+            'rejection_reason' => null,
+            'verified_by' => null,
+            'verified_at' => null,
         ];
     }
 }
