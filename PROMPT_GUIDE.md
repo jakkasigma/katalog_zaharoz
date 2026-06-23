@@ -102,8 +102,7 @@ resources/views/layouts/
 
 ---
 
-## Anggota 3 — Modul Produk & Katalog
-
+## Anggota 3 (isa) — Modul Produk & Katalog
 ### Branch: `feature/produk`
 
 ```bash
