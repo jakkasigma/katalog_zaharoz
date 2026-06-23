@@ -85,28 +85,52 @@
 
 ---
 
-## Anggota 4 - Modul Checkout & Transaksi
+## Anggota 4 - Modul Checkout & Transaksi ✅ SELESAI
 
 ### Tanggung Jawab
 
-* Checkout
-* Pemilihan Alamat
-* Perhitungan Total Belanja
-* Upload Bukti Transfer
-* Riwayat Transaksi
-* Tracking Status Pesanan
+* [x] Checkout
+* [x] Pemilihan Alamat
+* [x] Perhitungan Total Belanja
+* [x] Upload Bukti Transfer
+* [x] Riwayat Transaksi
+* [x] Tracking Status Pesanan
 
 ### Database
 
-* orders
-* order_items
-* payments
+* [x] orders
+* [x] order_items
+* [x] payments
 
 ### Output
 
-* Sistem Checkout
-* Upload Bukti Pembayaran
-* Riwayat Pesanan User
+* [x] Sistem Checkout
+* [x] Upload Bukti Pembayaran
+* [x] Riwayat Pesanan User
+
+### File yang Sudah Dibuat
+
+```
+app/Http/Controllers/CheckoutController.php
+app/Http/Controllers/OrderController.php
+app/Http/Controllers/PaymentController.php
+app/Http/Requests/CheckoutRequest.php
+app/Http/Requests/UploadPaymentProofRequest.php
+app/Policies/OrderPolicy.php
+database/factories/AddressFactory.php
+database/factories/OrderFactory.php
+database/factories/OrderItemFactory.php
+database/factories/PaymentFactory.php
+database/migrations/2026_06_23_092002_add_address_and_notes_to_orders_table.php
+database/seeders/OrderSeeder.php
+resources/views/checkout/index.blade.php
+resources/views/orders/index.blade.php
+resources/views/orders/show.blade.php
+resources/views/payments/create.blade.php
+tests/Feature/CheckoutTest.php
+tests/Feature/OrderTest.php
+tests/Feature/PaymentTest.php
+```
 
 ---
 

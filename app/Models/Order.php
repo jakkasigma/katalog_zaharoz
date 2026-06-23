@@ -15,11 +15,13 @@ class Order extends Model
     protected $fillable = [
         'order_number',
         'user_id',
+        'address_id',
         'status',
         'payment_status',
         'subtotal',
         'shipping_cost',
         'total',
+        'notes',
         'tracking_number',
         'shipped_at',
         'delivered_at',
@@ -47,6 +49,14 @@ class Order extends Model
     public function payment(): HasOne
     {
         return $this->hasOne(Payment::class);
+    }
+
+    /**
+     * @return BelongsTo<Address, $this>
+     */
+    public function address(): BelongsTo
+    {
+        return $this->belongsTo(Address::class);
     }
 
     protected function casts(): array

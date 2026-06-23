@@ -172,7 +172,7 @@ Wajib ikuti:
 
 ---
 
-## Anggota 4 — Modul Checkout & Transaksi
+## Anggota 4 — (aziz) Modul Checkout & Transaksi
 
 ### Branch: `feature/checkout`
 
@@ -188,8 +188,10 @@ git checkout -b feature/checkout
 Kerjakan modul Checkout & Transaksi untuk project Laravel Blade Eyes of Zaharoz.
 
 Baca file ini dulu:
+- .agents/skills/frontend-design
 - DESIGN_SYSTEM.md
 - tugas_anggota.md
+- GIT_TUTORIAL.md
 - workflow.md
 - resources/css/app.css
 - resources/views/components/ (semua file)
