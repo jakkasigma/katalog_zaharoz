@@ -19,10 +19,10 @@
     {{-- Content --}}
     <div class="relative z-10 text-center px-4 sm:px-8 w-full max-w-4xl mx-auto">
         <p class="font-mono text-[10px] uppercase tracking-[0.4em] text-rose-400 mb-4 sm:mb-5">
-            New Drop — 2025
+            New Drop — 2026
         </p>
         <h1 class="font-display text-4xl sm:text-6xl lg:text-7xl uppercase leading-none text-white mb-6 sm:mb-8 tracking-tight">
-            Eyes of<br><span class="text-rose-500">Zaharoz</span>
+            Eye of<br><span class="text-rose-500">Zaharoz</span>
         </h1>
         <a href="{{ route('store.index') }}"
            class="inline-block w-full sm:w-auto font-cinzel text-[11px] uppercase tracking-[0.25em] px-10 py-4 bg-white text-black hover:bg-rose-500 hover:text-white transition-colors duration-300 min-h-[44px]">
@@ -178,7 +178,7 @@
         </p>
         <div class="w-16 h-px bg-rose-600 mx-auto mb-6 sm:mb-8"></div>
         <p class="text-sm text-zinc-500 leading-relaxed max-w-xl mx-auto mb-8 sm:mb-10">
-            Setiap piece Eyes of Zaharoz lahir dari penolakan terhadap keseragaman. Terbatas. Handcrafted. Tidak akan pernah direproduksi massal.
+            Setiap piece Eye of Zaharoz lahir dari penolakan terhadap keseragaman. Terbatas. Handcrafted. Tidak akan pernah direproduksi massal.
         </p>
         <a href="{{ route('about') }}"
            class="inline-block w-full sm:w-auto font-cinzel text-[11px] uppercase tracking-[0.25em] px-8 py-3.5 border border-zinc-700 hover:border-rose-600 text-zinc-400 hover:text-rose-400 transition-colors duration-200 min-h-[44px]">

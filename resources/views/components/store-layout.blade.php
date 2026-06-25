@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>{{ $title ?? 'Shop' }} — Eyes of Zaharoz</title>
+    <title>{{ $title ?? 'Shop' }} — Eye of Zaharoz</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Viaoda+Libre&family=Cinzel:wght@400;600;700&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -30,7 +30,7 @@
                     <div class="w-px h-4 bg-zinc-800"></div>
                     <a href="{{ route('store.index') }}"
                        class="font-display text-sm uppercase tracking-[0.15em] text-white hover:text-rose-400 transition-colors">
-                        Eyes of Zaharoz
+                        Eye of Zaharoz
                         <span class="font-mono text-[9px] text-zinc-700 ml-1 uppercase tracking-widest">/ Store</span>
                     </a>
                 </div>
@@ -170,7 +170,7 @@
             <div class="flex flex-col sm:flex-row items-center justify-between gap-4">
                 <div class="flex items-center gap-4">
                     <a href="{{ route('home') }}" class="font-display text-sm uppercase tracking-widest text-zinc-700 hover:text-white transition-colors">
-                        Eyes of Zaharoz
+                        Eye of Zaharoz
                     </a>
                     <span class="text-zinc-800">·</span>
                     <a href="{{ route('store.index') }}" class="font-mono text-[10px] uppercase tracking-widest text-zinc-700 hover:text-rose-400 transition-colors">Store</a>

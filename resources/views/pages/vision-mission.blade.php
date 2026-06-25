@@ -24,7 +24,7 @@
                         "Menjadi brand gothic clothing lokal terdepan yang mendefinisikan ulang batas antara pakaian dan seni — tanpa kompromi, tanpa batas."
                     </blockquote>
                     <p class="text-sm text-zinc-500 leading-relaxed">
-                        Kami percaya bahwa fashion Indonesia tidak harus mengikuti tren global. Ada estetika gelap, kuat, dan jujur yang menunggu untuk dirayakan — dan Eyes of Zaharoz hadir untuk menjadi suara dari komunitas itu.
+                        Kami percaya bahwa fashion Indonesia tidak harus mengikuti tren global. Ada estetika gelap, kuat, dan jujur yang menunggu untuk dirayakan — dan Eye of Zaharoz hadir untuk menjadi suara dari komunitas itu.
                     </p>
                 </div>
             </div>

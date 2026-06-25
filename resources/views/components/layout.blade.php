@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>{{ $title ?? 'Eyes of Zaharoz' }} — Gothic Clothing</title>
+    <title>{{ $title ?? 'Eye of Zaharoz' }} — Gothic Clothing</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Viaoda+Libre&family=Cinzel:wght@400;600;700&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -26,7 +26,7 @@
                         <img src="{{ asset('storage/' . $companyProfile->logo_path) }}" alt="Logo" class="w-26 h-26 object-contain">
                     @endif
                     <span class="font-display text-xl font-bold uppercase tracking-widest text-white group-hover:text-rose-400 transition-colors duration-200">
-                        Eyes of Zaharoz
+                        Eye of Zaharoz
                     </span>
                 </a>
 
@@ -124,7 +124,7 @@
                         @if($companyProfile?->logo_path)
                         <img src="{{ asset('storage/' . $companyProfile->logo_path) }}" alt="Logo" class="w-22 h-22 object-contain">
                         @endif
-                        <h3 class="font-display text-lg uppercase tracking-widest text-white">{{ $companyProfile?->name ?? 'Eyes of Zaharoz' }}</h3>
+                        <h3 class="font-display text-lg uppercase tracking-widest text-white">{{ $companyProfile?->name ?? 'Eye of Zaharoz' }}</h3>
                     </div>
                     <p class="text-sm text-zinc-500 leading-relaxed">
                         {{ $companyProfile?->description ? Str::limit($companyProfile->description, 100) : 'Custom gothic clothing & reworked apparel. Anti-fast-fashion. Underground. Unapologetic.' }}
@@ -182,7 +182,7 @@
 
             <div class="mt-10 pt-6 border-t border-zinc-800 flex flex-col sm:flex-row items-center justify-between gap-4">
                 <p class="font-mono text-xs text-zinc-700 uppercase tracking-widest">
-                    © {{ date('Y') }} Eyes of Zaharoz. All rights reserved.
+                    © {{ date('Y') }} Eye of Zaharoz. All rights reserved.
                 </p>
                 <p class="font-mono text-xs text-zinc-800 uppercase tracking-widest">
                     Gothic · Underground · Reworked

@@ -5,7 +5,7 @@
         <x-page-header
             eyebrow="Admin Control"
             title="Dashboard"
-            description="Kelola inventory, pesanan, dan laporan Eyes of Zaharoz."
+            description="Kelola inventory, pesanan, dan laporan Eye of Zaharoz."
         />
 
         <div class="mt-8 grid gap-6 md:grid-cols-4">

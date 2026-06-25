@@ -191,7 +191,7 @@
                     allowfullscreen=""
                     loading="lazy"
                     referrerpolicy="no-referrer-when-downgrade"
-                    title="Lokasi Eyes of Zaharoz">
+                    title="Lokasi Eye of Zaharoz">
                 </iframe>
             </div>
             <p class="font-mono text-xs text-zinc-700 mt-3 uppercase tracking-widest">

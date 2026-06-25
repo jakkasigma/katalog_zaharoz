@@ -23,7 +23,7 @@
                             {!! nl2br(e($companyProfile->description)) !!}
                         @else
                             <p>
-                                Eyes of Zaharoz bukan sekadar brand pakaian. Kami adalah ekspresi dari mereka yang menolak untuk berpakaian seperti semua orang, yang merasa pakaian adalah bahasa, bukan seragam.
+                                Eye of Zaharoz bukan sekadar brand pakaian. Kami adalah ekspresi dari mereka yang menolak untuk berpakaian seperti semua orang, yang merasa pakaian adalah bahasa, bukan seragam.
                             </p>
                             <p>
                                 Dimulai dari sebuah kamar gelap di Yogyakarta, dengan gunting, cat, dan keyakinan bahwa fast-fashion adalah kebohongan — kami memulai perjalanan merework dan menciptakan pakaian yang berbicara lebih keras dari kata-kata.
@@ -41,9 +41,9 @@
                     @php
                         $milestones = [
                             ['year' => '2022', 'title' => 'Awal Mula', 'desc' => 'Eksperimen pertama — merework jaket denim lama dengan motif cybersigilism.'],
-                            ['year' => '2023', 'title' => 'Brand Terbentuk', 'desc' => 'Eyes of Zaharoz resmi berdiri. Koleksi pertama terjual habis dalam 48 jam.'],
+                            ['year' => '2023', 'title' => 'Brand Terbentuk', 'desc' => 'Eye of Zaharoz resmi berdiri. Koleksi pertama terjual habis dalam 48 jam.'],
                             ['year' => '2024', 'title' => 'Ekspansi', 'desc' => 'Masuk ke pasar custom order. Komunitas gothic lokal mulai mengakui kami.'],
-                            ['year' => '2025', 'title' => 'Kini', 'desc' => 'Melayani ratusan pelanggan di seluruh Indonesia. Tetap terbatas. Tetap jujur.'],
+                            ['year' => '2026', 'title' => 'Kini', 'desc' => 'Melayani ratusan pelanggan di seluruh Indonesia. Tetap terbatas. Tetap jujur.'],
                         ];
                     @endphp
                     <div class="space-y-0">

@@ -2,7 +2,7 @@
 
 @section('content')
     <x-card>
-        <x-page-header eyebrow="Brand Control" title="Company Profile" description="Kelola identitas, kontak, dan sosial media Eyes of Zaharoz." />
+        <x-page-header eyebrow="Brand Control" title="Company Profile" description="Kelola identitas, kontak, dan sosial media Eye of Zaharoz." />
 
         <form method="POST" action="{{ route('admin.company-profile.update') }}" enctype="multipart/form-data" class="mt-8 grid gap-6 lg:grid-cols-2">
             @csrf

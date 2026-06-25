@@ -18,8 +18,8 @@ class CompanyProfileController extends Controller
 
         if (! $companyProfile) {
             $companyProfile = CompanyProfile::query()->create([
-                'name' => 'Eyes of Zaharoz',
-                'email' => 'hello@eyesofzaharoz.test',
+                'name' => 'Eye of Zaharoz',
+                'email' => 'hello@eyeofzaharoz.test',
                 'phone' => '080000000000',
             ]);
         }
@@ -73,8 +73,8 @@ class CompanyProfileController extends Controller
 
         if (! $companyProfile) {
             $companyProfile = CompanyProfile::query()->create([
-                'name' => 'Eyes of Zaharoz',
-                'email' => 'hello@eyesofzaharoz.test',
+                'name' => 'Eye of Zaharoz',
+                'email' => 'hello@eyeofzaharoz.test',
                 'phone' => '080000000000',
             ]);
         }

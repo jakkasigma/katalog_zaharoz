@@ -10,7 +10,7 @@
 
             <div class="relative flex h-full flex-col justify-between">
                 <a href="{{ url('/') }}" class="font-display text-xl font-bold uppercase tracking-[0.22em] text-brass">
-                    Eyes <span class="text-lens">Of</span> Zaharoz
+                    Eye <span class="text-lens">Of</span> Zaharoz
                 </a>
 
                 <div>
@@ -19,7 +19,7 @@
                         Enter the vault.
                     </h1>
                     <p class="mt-5 max-w-sm text-sm leading-6 text-zinc-400">
-                        Kelola inventory, pesanan, pembayaran, dan laporan penjualan Eyes of Zaharoz.
+                        Kelola inventory, pesanan, pembayaran, dan laporan penjualan Eye of Zaharoz.
                     </p>
                 </div>
 
@@ -33,7 +33,7 @@
             <div class="w-full">
                 <div class="mb-8 lg:hidden">
                     <p class="font-display text-xl font-bold uppercase tracking-[0.22em] text-brass">
-                        Eyes <span class="text-lens">Of</span> Zaharoz
+                        Eye <span class="text-lens">Of</span> Zaharoz
                     </p>
                 </div>
 
