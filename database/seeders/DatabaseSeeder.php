@@ -23,6 +23,11 @@ class DatabaseSeeder extends Seeder
             'email' => 'test@example.com',
         ]);
 
+        User::factory()->admin()->create([
+            'name' => 'Admin Eyes',
+            'email' => 'admin@eyes.test',
+        ]);
+
         $categories = collect([
             ['name' => 'Outerwear', 'description' => 'Jaket dan mantel gothic untuk siluet malam.', 'sort_order' => 1],
             ['name' => 'Shirts', 'description' => 'Atasan hitam dengan potongan tajam dan aksen merah.', 'sort_order' => 2],

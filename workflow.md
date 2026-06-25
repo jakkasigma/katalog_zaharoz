@@ -55,13 +55,13 @@ Pesanan Selesai
 * [x] Login
 * [x] Mengelola profil
 * [x] Mengelola alamat pengiriman
-* [ ] Melihat katalog produk
-* [ ] Mencari produk
-* [ ] Menambahkan produk ke keranjang
-* [ ] Melakukan checkout
-* [ ] Upload bukti transfer
-* [ ] Melihat status pesanan
-* [ ] Melihat riwayat transaksi
+* [x] Melihat katalog produk
+* [x] Mencari produk
+* [x] Menambahkan produk ke keranjang
+* [x] Melakukan checkout
+* [x] Upload bukti transfer
+* [x] Melihat status pesanan
+* [x] Melihat riwayat transaksi
 
 ---
 
@@ -172,7 +172,7 @@ Simpan Alamat
 
 ---
 
-## Workflow Pembelian Produk
+## Workflow Pembelian Produk ✅ SELESAI
 
 ```text
 Melihat Produk
@@ -195,7 +195,7 @@ Checkout
 
 ---
 
-## Workflow Checkout
+## Workflow Checkout ✅ SELESAI
 
 ```text
 Checkout
@@ -222,7 +222,7 @@ Menunggu Verifikasi Admin
 
 ---
 
-## Workflow Tracking Pesanan
+## Workflow Tracking Pesanan ✅ SELESAI
 
 ```text
 Pesanan Saya

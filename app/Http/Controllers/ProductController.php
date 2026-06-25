@@ -9,6 +9,39 @@ use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
+    public function storefront(Request $request): View
+    {
+        $search = $request->string('search')->trim()->toString();
+        $categorySlug = $request->string('category')->trim()->toString();
+
+        $products = Product::query()
+            ->with('category')
+            ->where('is_active', true)
+            ->when($search !== '', function ($query) use ($search): void {
+                $query->where(function ($query) use ($search): void {
+                    $query->where('name', 'like', "%{$search}%")
+                        ->orWhere('description', 'like', "%{$search}%")
+                        ->orWhere('sku', 'like', "%{$search}%");
+                });
+            })
+            ->when($categorySlug !== '', function ($query) use ($categorySlug): void {
+                $query->whereHas('category', function ($query) use ($categorySlug): void {
+                    $query->where('slug', $categorySlug)->where('is_active', true);
+                });
+            })
+            ->latest()
+            ->paginate(12)
+            ->withQueryString();
+
+        $categories = Category::query()
+            ->where('is_active', true)
+            ->orderBy('sort_order')
+            ->orderBy('name')
+            ->get();
+
+        return view('store.index', compact('products', 'categories', 'search', 'categorySlug'));
+    }
+
     public function index(Request $request): View
     {
         $search = $request->string('search')->trim()->toString();
@@ -59,6 +92,6 @@ class ProductController extends Controller
             ->limit(3)
             ->get();
 
-        return view('products.show', compact('product', 'relatedProducts'));
+        return view('store.show', compact('product', 'relatedProducts'));
     }
 }

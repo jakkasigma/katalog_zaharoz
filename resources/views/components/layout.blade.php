@@ -14,14 +14,17 @@
 
     {{-- NAVBAR --}}
     <header x-data="{ open: false, scrolled: false }"
-            x-init="window.addEventListener('scroll', () => scrolled = window.scrollY > 20)"
-            :class="scrolled ? 'border-b border-zinc-800 bg-black/95 backdrop-blur-sm' : 'bg-transparent'"
-            class="fixed top-0 left-0 right-0 z-50 transition-all duration-300">
+            x-init="window.addEventListener('scroll', () => scrolled = window.scrollY > 10)"
+            :class="scrolled ? 'bg-black/98 border-b border-zinc-800 shadow-lg' : '{{ request()->routeIs('home') ? 'bg-transparent' : 'bg-black/98 border-b border-zinc-800' }}'"
+            class="fixed top-0 left-0 right-0 z-50 backdrop-blur-sm transition-all duration-200">
         <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex items-center justify-between h-16">
 
                 {{-- Logo --}}
                 <a href="{{ route('home') }}" class="flex items-center gap-3 group">
+                    @if(isset($companyProfile) && $companyProfile && $companyProfile->logo_path)
+                        <img src="{{ asset('storage/' . $companyProfile->logo_path) }}" alt="Logo" class="w-26 h-26 object-contain">
+                    @endif
                     <span class="font-display text-xl font-bold uppercase tracking-widest text-white group-hover:text-rose-400 transition-colors duration-200">
                         Eyes of Zaharoz
                     </span>
@@ -37,7 +40,7 @@
                     <a href="{{ route('about') }}"
                        class="font-cinzel text-xs uppercase tracking-[0.2em] transition-colors duration-200
                               {{ request()->routeIs('about') ? 'text-rose-400' : 'text-zinc-400 hover:text-white' }}">
-                        Tentang Kami
+                        Tentang
                     </a>
                     <a href="{{ route('vision') }}"
                        class="font-cinzel text-xs uppercase tracking-[0.2em] transition-colors duration-200
@@ -54,20 +57,15 @@
                 {{-- CTA + Auth --}}
                 <div class="hidden md:flex items-center gap-4">
                     @auth
-                        <a href="{{ route('user.dashboard') }}"
-                           class="font-cinzel text-xs uppercase tracking-[0.2em] text-zinc-400 hover:text-white transition-colors duration-200">
-                            Dashboard
-                        </a>
-                    @else
-                        <a href="{{ route('login') }}"
-                           class="font-cinzel text-xs uppercase tracking-[0.2em] text-zinc-400 hover:text-white transition-colors duration-200">
-                            Masuk
-                        </a>
-                        <a href="{{ route('register') }}"
-                           class="font-cinzel text-xs uppercase tracking-[0.15em] px-4 py-2 bg-rose-600 hover:bg-rose-500 text-white transition-colors duration-200">
-                            Daftar
+                        <a href="{{ route('dashboard') }}"
+                           class="font-cinzel text-xs uppercase tracking-[0.2em] transition-colors duration-200 text-zinc-400 hover:text-white">
+                            Akun
                         </a>
                     @endauth
+                    <a href="{{ route('store.index') }}"
+                       class="font-cinzel text-xs uppercase tracking-[0.15em] px-5 py-2.5 border border-rose-600 hover:bg-rose-600 text-rose-400 hover:text-white transition-colors duration-200">
+                        Shop →
+                    </a>
                 </div>
 
                 {{-- Mobile hamburger --}}
@@ -93,16 +91,18 @@
                  x-transition:leave-end="opacity-0"
                  class="md:hidden border-t border-zinc-800 py-4 space-y-1">
                 <a href="{{ route('home') }}" class="block px-2 py-3 font-cinzel text-xs uppercase tracking-[0.2em] {{ request()->routeIs('home') ? 'text-rose-400' : 'text-zinc-400' }}">Beranda</a>
-                <a href="{{ route('about') }}" class="block px-2 py-3 font-cinzel text-xs uppercase tracking-[0.2em] {{ request()->routeIs('about') ? 'text-rose-400' : 'text-zinc-400' }}">Tentang Kami</a>
+                <a href="{{ route('about') }}" class="block px-2 py-3 font-cinzel text-xs uppercase tracking-[0.2em] {{ request()->routeIs('about') ? 'text-rose-400' : 'text-zinc-400' }}">Tentang</a>
                 <a href="{{ route('vision') }}" class="block px-2 py-3 font-cinzel text-xs uppercase tracking-[0.2em] {{ request()->routeIs('vision') ? 'text-rose-400' : 'text-zinc-400' }}">Visi & Misi</a>
                 <a href="{{ route('contact') }}" class="block px-2 py-3 font-cinzel text-xs uppercase tracking-[0.2em] {{ request()->routeIs('contact') ? 'text-rose-400' : 'text-zinc-400' }}">Kontak</a>
-                <div class="pt-3 border-t border-zinc-800 flex gap-4">
+                <div class="pt-3 border-t border-zinc-800 space-y-2">
                     @auth
-                        <a href="{{ route('user.dashboard') }}" class="font-cinzel text-xs uppercase tracking-[0.2em] text-zinc-400">Dashboard</a>
+                        <a href="{{ route('dashboard') }}" class="block px-2 py-2 font-cinzel text-xs uppercase tracking-[0.2em] text-zinc-400">Akun Saya</a>
                     @else
-                        <a href="{{ route('login') }}" class="font-cinzel text-xs uppercase tracking-[0.2em] text-zinc-400">Masuk</a>
-                        <a href="{{ route('register') }}" class="font-cinzel text-xs uppercase tracking-[0.15em] px-4 py-2 bg-rose-600 text-white">Daftar</a>
+                        <a href="{{ route('login') }}" class="block px-2 py-2 font-cinzel text-xs uppercase tracking-[0.2em] text-zinc-400">Masuk</a>
                     @endauth
+                    <a href="{{ route('store.index') }}" class="block mx-2 font-cinzel text-xs uppercase tracking-[0.15em] px-4 py-3 border border-rose-600 text-rose-400 text-center">
+                        Shop →
+                    </a>
                 </div>
             </div>
         </nav>
@@ -120,14 +120,25 @@
 
                 {{-- Brand --}}
                 <div class="space-y-4">
-                    <h3 class="font-display text-lg uppercase tracking-widest text-white">Eyes of Zaharoz</h3>
+                    <div class="flex items-center gap-3">
+                        @if($companyProfile?->logo_path)
+                        <img src="{{ asset('storage/' . $companyProfile->logo_path) }}" alt="Logo" class="w-22 h-22 object-contain">
+                        @endif
+                        <h3 class="font-display text-lg uppercase tracking-widest text-white">{{ $companyProfile?->name ?? 'Eyes of Zaharoz' }}</h3>
+                    </div>
                     <p class="text-sm text-zinc-500 leading-relaxed">
-                        Custom gothic clothing & reworked apparel. Anti-fast-fashion. Underground. Unapologetic.
+                        {{ $companyProfile?->description ? Str::limit($companyProfile->description, 100) : 'Custom gothic clothing & reworked apparel. Anti-fast-fashion. Underground. Unapologetic.' }}
                     </p>
                     <div class="flex gap-4 pt-1">
-                        <a href="#" class="font-mono text-xs uppercase tracking-widest text-zinc-600 hover:text-rose-400 transition-colors">IG</a>
-                        <a href="#" class="font-mono text-xs uppercase tracking-widest text-zinc-600 hover:text-rose-400 transition-colors">TT</a>
-                        <a href="#" class="font-mono text-xs uppercase tracking-widest text-zinc-600 hover:text-rose-400 transition-colors">WA</a>
+                        @if($companyProfile?->instagram_url)
+                        <a href="{{ $companyProfile->instagram_url }}" target="_blank" class="font-mono text-xs uppercase tracking-widest text-zinc-600 hover:text-rose-400 transition-colors">IG</a>
+                        @endif
+                        @if($companyProfile?->tiktok_url)
+                        <a href="{{ $companyProfile->tiktok_url }}" target="_blank" class="font-mono text-xs uppercase tracking-widest text-zinc-600 hover:text-rose-400 transition-colors">TT</a>
+                        @endif
+                        @if($companyProfile?->whatsapp)
+                        <a href="https://wa.me/{{ preg_replace('/[^0-9]/', '', $companyProfile->whatsapp) }}" target="_blank" class="font-mono text-xs uppercase tracking-widest text-zinc-600 hover:text-rose-400 transition-colors">WA</a>
+                        @endif
                     </div>
                 </div>
 
@@ -139,6 +150,7 @@
                         <li><a href="{{ route('about') }}" class="text-sm text-zinc-500 hover:text-white transition-colors">Tentang Kami</a></li>
                         <li><a href="{{ route('vision') }}" class="text-sm text-zinc-500 hover:text-white transition-colors">Visi & Misi</a></li>
                         <li><a href="{{ route('contact') }}" class="text-sm text-zinc-500 hover:text-white transition-colors">Kontak</a></li>
+                        <li><a href="{{ route('store.index') }}" class="text-sm text-rose-500 hover:text-rose-400 transition-colors">Shop →</a></li>
                     </ul>
                 </div>
 
@@ -146,18 +158,24 @@
                 <div class="space-y-4">
                     <p class="font-mono text-xs uppercase tracking-[0.3em] text-rose-400">Kontak</p>
                     <ul class="space-y-2 text-sm text-zinc-500">
+                        @if($companyProfile?->address)
                         <li class="flex items-start gap-2">
                             <span class="font-mono text-xs text-zinc-700 mt-0.5">📍</span>
-                            <span>Yogyakarta, Indonesia</span>
+                            <span>{{ $companyProfile->address }}</span>
                         </li>
+                        @endif
+                        @if($companyProfile?->email)
                         <li class="flex items-start gap-2">
                             <span class="font-mono text-xs text-zinc-700 mt-0.5">✉</span>
-                            <span>eyesofzaharoz@gmail.com</span>
+                            <span>{{ $companyProfile->email }}</span>
                         </li>
+                        @endif
+                        @if($companyProfile?->phone)
                         <li class="flex items-start gap-2">
                             <span class="font-mono text-xs text-zinc-700 mt-0.5">📞</span>
-                            <span>+62 xxx-xxxx-xxxx</span>
+                            <span>{{ $companyProfile->phone }}</span>
                         </li>
+                        @endif
                     </ul>
                 </div>
             </div>

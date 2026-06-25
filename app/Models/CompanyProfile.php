@@ -22,5 +22,9 @@ class CompanyProfile extends Model
         'logo_path',
         'instagram_url',
         'tiktok_url',
+        'bank_name',
+        'bank_account_number',
+        'bank_account_name',
+        'qris_path',
     ];
 }

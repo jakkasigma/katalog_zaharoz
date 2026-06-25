@@ -1,47 +1,96 @@
-@extends('layouts.app')
+<x-store-layout title="Edit Profil">
+    {{-- Profile Edit Page --}}
+    <section class="pt-14 pb-16 bg-black min-h-screen">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
 
-@section('content')
-    <section class="grid gap-6 lg:grid-cols-[0.75fr_1.25fr]">
-        <x-card variant="dark">
-            <p class="font-mono text-xs uppercase tracking-[0.3em] text-lens">Profil</p>
-            <h1 class="mt-4 font-display text-4xl font-bold">Identitas customer.</h1>
-            @if (auth()->user()->profile_photo_path)
-                <img src="{{ asset('storage/'.auth()->user()->profile_photo_path) }}" alt="Foto Profil" class="mt-8 h-32 w-32 rounded-full border-4 border-lens/40 object-cover">
-            @else
-                <div class="mt-8 flex h-32 w-32 items-center justify-center rounded-full border border-lens/40 font-display text-4xl text-lens">
-                    {{ str(auth()->user()->name)->substr(0, 1)->upper() }}
-                </div>
-            @endif
-            <x-link-button :href="route('profile.password')" variant="secondary" class="mt-8 rounded-full bg-white px-4 py-2 text-sm text-night">Ganti password</x-link-button>
-        </x-card>
+            <div class="grid grid-cols-1 lg:grid-cols-[0.4fr_0.6fr] gap-12">
 
-        <x-card>
-            <form method="POST" action="{{ route('profile.update') }}" enctype="multipart/form-data" class="grid gap-4">
-                @csrf
-                @method('PATCH')
+                {{-- Left: Profile Preview --}}
+                <div class="text-center lg:text-left">
+                    <p class="font-mono text-xs uppercase tracking-[0.3em] text-rose-400 mb-4">Profil Customer</p>
+                    <h1 class="font-display text-4xl sm:text-5xl uppercase text-white leading-none mb-6">
+                        Identitas<br><span class="text-rose-500">Kamu</span>
+                    </h1>
+                    <div class="w-16 h-px bg-rose-600 mb-8 mx-auto lg:mx-0"></div>
 
-                <div>
-                    <x-label for="name">Nama</x-label>
-                    <x-input id="name" name="name" value="{{ old('name', auth()->user()->name) }}" required />
-                    @error('name') <p class="mt-1 text-sm text-red-600">{{ $message }}</p> @enderror
+                    <a href="{{ route('profile.password') }}"
+                       class="inline-block font-cinzel text-xs uppercase tracking-[0.15em] px-6 py-3 border border-zinc-700 hover:border-rose-600 text-zinc-400 hover:text-rose-400 transition-colors duration-200">
+                        Ganti Password
+                    </a>
+
+                    <a href="{{ route('dashboard') }}"
+                       class="inline-block mt-3 font-cinzel text-xs uppercase tracking-[0.15em] px-6 py-3 border border-zinc-800 hover:border-zinc-600 text-zinc-500 hover:text-white transition-colors duration-200">
+                        ← Kembali
+                    </a>
                 </div>
-                <div>
-                    <x-label for="email">Email</x-label>
-                    <x-input id="email" type="email" name="email" value="{{ old('email', auth()->user()->email) }}" required />
-                    @error('email') <p class="mt-1 text-sm text-red-600">{{ $message }}</p> @enderror
+
+                {{-- Right: Edit Form --}}
+                <div class="bg-zinc-950 border border-zinc-800 p-8 sm:p-10">
+                    <div class="mb-8">
+                        <p class="font-mono text-xs uppercase tracking-[0.3em] text-zinc-600 mb-2">Update Info</p>
+                        <h2 class="font-display text-3xl uppercase text-white">Edit Profil</h2>
+                    </div>
+
+                    @if (session('status'))
+                        <div class="mb-6 p-4 bg-rose-950/50 border border-rose-900/50 rounded">
+                            <p class="text-sm text-rose-400">{{ session('status') }}</p>
+                        </div>
+                    @endif
+
+                    <form method="POST" action="{{ route('profile.update') }}" class="space-y-5">
+                        @csrf
+                        @method('PATCH')
+
+                        <div>
+                            <label for="name" class="block font-mono text-xs uppercase tracking-[0.2em] text-zinc-500 mb-2">Nama Lengkap</label>
+                            <input id="name"
+                                   type="text"
+                                   name="name"
+                                   value="{{ old('name', auth()->user()->name) }}"
+                                   required
+                                   class="w-full px-4 py-3 bg-black border border-zinc-800 text-white placeholder-zinc-700 focus:border-rose-600 focus:outline-none focus:ring-1 focus:ring-rose-600 transition-colors">
+                            @error('name')
+                                <p class="mt-1.5 text-xs text-rose-400">{{ $message }}</p>
+                            @enderror
+                        </div>
+
+                        <div>
+                            <label for="email" class="block font-mono text-xs uppercase tracking-[0.2em] text-zinc-500 mb-2">Email</label>
+                            <input id="email"
+                                   type="email"
+                                   name="email"
+                                   value="{{ old('email', auth()->user()->email) }}"
+                                   required
+                                   class="w-full px-4 py-3 bg-black border border-zinc-800 text-white placeholder-zinc-700 focus:border-rose-600 focus:outline-none focus:ring-1 focus:ring-rose-600 transition-colors">
+                            @error('email')
+                                <p class="mt-1.5 text-xs text-rose-400">{{ $message }}</p>
+                            @enderror
+                        </div>
+
+                        <div>
+                            <label for="phone" class="block font-mono text-xs uppercase tracking-[0.2em] text-zinc-500 mb-2">Nomor HP</label>
+                            <input id="phone"
+                                   type="text"
+                                   name="phone"
+                                   value="{{ old('phone', auth()->user()->phone) }}"
+                                   required
+                                   class="w-full px-4 py-3 bg-black border border-zinc-800 text-white placeholder-zinc-700 focus:border-rose-600 focus:outline-none focus:ring-1 focus:ring-rose-600 transition-colors">
+                            @error('phone')
+                                <p class="mt-1.5 text-xs text-rose-400">{{ $message }}</p>
+                            @enderror
+                        </div>
+
+                        <button type="submit"
+                                class="w-full font-cinzel text-xs uppercase tracking-[0.15em] px-6 py-4 bg-rose-600 hover:bg-rose-500 text-white transition-colors duration-200">
+                            Simpan Perubahan
+                        </button>
+                    </form>
                 </div>
-                <div>
-                    <x-label for="phone">Nomor HP</x-label>
-                    <x-input id="phone" name="phone" value="{{ old('phone', auth()->user()->phone) }}" required />
-                    @error('phone') <p class="mt-1 text-sm text-red-600">{{ $message }}</p> @enderror
-                </div>
-                <div>
-                    <x-label for="profile_photo">Foto profil</x-label>
-                    <x-input id="profile_photo" type="file" name="profile_photo" />
-                    @error('profile_photo') <p class="mt-1 text-sm text-red-600">{{ $message }}</p> @enderror
-                </div>
-                <x-button type="submit">Simpan perubahan</x-button>
-            </form>
-        </x-card>
+
+            </div>
+        </div>
     </section>
-@endsection
+</x-store-layout>
+
+
+

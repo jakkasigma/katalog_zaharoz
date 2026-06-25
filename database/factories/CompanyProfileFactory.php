@@ -18,7 +18,18 @@ class CompanyProfileFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'name' => fake()->company(),
+            'email' => fake()->companyEmail(),
+            'phone' => fake()->phoneNumber(),
+            'whatsapp' => fake()->optional()->phoneNumber(),
+            'address' => fake()->optional()->address(),
+            'city' => fake()->optional()->city(),
+            'province' => fake()->optional()->state(),
+            'postal_code' => fake()->optional()->postcode(),
+            'description' => fake()->optional()->paragraph(),
+            'logo_path' => null,
+            'instagram_url' => fake()->optional()->url(),
+            'tiktok_url' => fake()->optional()->url(),
         ];
     }
 }

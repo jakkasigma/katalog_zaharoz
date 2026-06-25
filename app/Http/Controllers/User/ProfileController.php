@@ -19,19 +19,7 @@ class ProfileController extends Controller
     public function update(UpdateProfileRequest $request): RedirectResponse
     {
         $user = $request->user();
-        $data = $request->validated();
-
-        if ($request->hasFile('profile_photo')) {
-            if ($user->profile_photo_path !== null) {
-                Storage::disk('public')->delete($user->profile_photo_path);
-            }
-
-            $data['profile_photo_path'] = $request->file('profile_photo')->store('profile-photos', 'public');
-        }
-
-        unset($data['profile_photo']);
-
-        $user->update($data);
+        $user->update($request->validated());
 
         return back()->with('status', 'Profil berhasil diperbarui.');
     }

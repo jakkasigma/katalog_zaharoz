@@ -24,7 +24,6 @@ class User extends Authenticatable
         'name',
         'email',
         'phone',
-        'profile_photo_path',
         'password',
         'is_admin',
         'is_active',
@@ -54,6 +53,19 @@ class User extends Authenticatable
     public function orders(): HasMany
     {
         return $this->hasMany(Order::class);
+    }
+
+    /**
+     * @return HasMany<Notification, $this>
+     */
+    public function notifications(): HasMany
+    {
+        return $this->hasMany(Notification::class)->latest();
+    }
+
+    public function unreadNotificationsCount(): int
+    {
+        return $this->notifications()->where('is_read', false)->count();
     }
 
     /**

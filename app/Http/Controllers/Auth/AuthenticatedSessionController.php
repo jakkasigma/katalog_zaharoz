@@ -27,6 +27,12 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
+        $user = Auth::user();
+
+        if ($user->is_admin && $user->is_active) {
+            return redirect()->route('admin.dashboard')->with('status', 'Login berhasil.');
+        }
+
         return redirect()->intended(route('dashboard'))->with('status', 'Login berhasil.');
     }
 

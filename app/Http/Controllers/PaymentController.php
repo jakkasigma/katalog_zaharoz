@@ -35,14 +35,14 @@ class PaymentController extends Controller
 
         $order->payment()->update([
             'proof_path' => $path,
-            'status' => 'pending_verification',
+            'status' => 'waiting_confirmation',
         ]);
 
         $order->update([
-            'payment_status' => 'pending_verification',
+            'payment_status' => 'waiting_confirmation',
         ]);
 
         return redirect()->route('orders.show', $order)
-            ->with('status', 'Bukti pembayaran berhasil diupload. Tunggu verifikasi dari admin.');
+            ->with('status', 'Bukti pembayaran berhasil diupload. Tunggu konfirmasi dari admin.');
     }
 }

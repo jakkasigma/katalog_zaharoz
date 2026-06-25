@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\CompanyProfile;
 use Illuminate\View\View;
 
 class CompanyProfileController extends Controller
@@ -13,7 +14,9 @@ class CompanyProfileController extends Controller
 
     public function about(): View
     {
-        return view('pages.about');
+        $companyProfile = CompanyProfile::query()->first();
+
+        return view('pages.about', compact('companyProfile'));
     }
 
     public function vision(): View
@@ -23,6 +26,8 @@ class CompanyProfileController extends Controller
 
     public function contact(): View
     {
-        return view('pages.contact');
+        $companyProfile = CompanyProfile::query()->first();
+
+        return view('pages.contact', compact('companyProfile'));
     }
 }

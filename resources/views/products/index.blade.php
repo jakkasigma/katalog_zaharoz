@@ -1,96 +1,164 @@
-@extends('layouts.app')
+<x-layout title="Katalog Produk">
 
-@section('content')
-    <x-card>
-        <x-page-header eyebrow="Katalog" title="Produk Eyes Of Zaharoz" description="Pilih pakaian gothic dengan aksen merah tajam untuk ritual harianmu.">
-            <x-slot:actions>
+    {{-- PAGE HEADER --}}
+    <section class="pt-16 pb-10 bg-black border-b border-zinc-900">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <p class="font-mono text-[10px] uppercase tracking-[0.4em] text-rose-400 mb-3">Katalog</p>
+            <div class="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4">
+                <h1 class="font-display text-5xl sm:text-6xl uppercase text-white leading-none">
+                    The <span class="text-rose-500">Collection</span>
+                </h1>
                 @auth
-                    <x-link-button :href="route('cart.index')" variant="secondary">Keranjang</x-link-button>
+                    @unless(auth()->user()->is_admin)
+                        <a href="{{ route('cart.index') }}"
+                           class="inline-flex items-center gap-2 font-cinzel text-xs uppercase tracking-[0.2em] px-5 py-3 border border-zinc-700 hover:border-rose-600 text-zinc-400 hover:text-rose-400 transition-colors duration-200 w-fit">
+                            Keranjang
+                            @php $cartCount = auth()->user()->cart?->items?->sum('quantity') ?? 0; @endphp
+                            @if($cartCount > 0)
+                                <span class="font-mono text-rose-400">{{ $cartCount }}</span>
+                            @endif
+                        </a>
+                    @endunless
                 @else
-                    <x-link-button :href="route('login')" variant="secondary">Login untuk beli</x-link-button>
+                    <a href="{{ route('login') }}"
+                       class="inline-flex items-center gap-2 font-cinzel text-xs uppercase tracking-[0.2em] px-5 py-3 bg-rose-600 hover:bg-rose-500 text-white transition-colors duration-200 w-fit">
+                        Login untuk Beli
+                    </a>
                 @endauth
-            </x-slot:actions>
-        </x-page-header>
-
-        <form method="GET" action="{{ route('products.index') }}" class="mt-8 grid gap-4 border border-glass bg-ink p-5 lg:grid-cols-[1fr_260px_auto] lg:items-end">
-            <div>
-                <x-label for="search">Cari Produk</x-label>
-                <x-input id="search" name="search" value="{{ $search }}" placeholder="Nama, SKU, atau deskripsi..." />
             </div>
+        </div>
+    </section>
 
-            <div>
-                <x-label for="category">Kategori</x-label>
-                <select id="category" name="category" class="mt-2 w-full border border-glass bg-night px-4 py-3 text-brass outline-none transition focus:border-lens focus:ring-4 focus:ring-lens/20">
-                    <option value="">Semua kategori</option>
+    {{-- FILTER BAR --}}
+    <section class="bg-zinc-950 border-b border-zinc-900 sticky top-16 z-30">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3">
+            <form method="GET" action="{{ route('store.index') }}"
+                  class="flex flex-col sm:flex-row gap-3 items-start sm:items-center">
+                <input type="text" name="search" value="{{ $search }}"
+                       placeholder="Cari produk..."
+                       class="bg-black border border-zinc-800 focus:border-rose-600 text-white text-sm px-4 py-2.5 outline-none transition-colors w-full sm:w-64 placeholder:text-zinc-700 font-mono">
+                <select name="category"
+                        class="bg-black border border-zinc-800 focus:border-rose-600 text-zinc-400 text-sm px-4 py-2.5 outline-none transition-colors w-full sm:w-auto font-cinzel uppercase tracking-[0.1em]">
+                    <option value="">Semua Kategori</option>
                     @foreach ($categories as $category)
                         <option value="{{ $category->slug }}" @selected($categorySlug === $category->slug)>{{ $category->name }}</option>
                     @endforeach
                 </select>
-            </div>
+                <div class="flex gap-2">
+                    <button type="submit"
+                            class="font-cinzel text-[11px] uppercase tracking-[0.2em] px-5 py-2.5 bg-rose-600 hover:bg-rose-500 text-white transition-colors">
+                        Filter
+                    </button>
+                    @if($search || $categorySlug)
+                        <a href="{{ route('store.index') }}"
+                           class="font-cinzel text-[11px] uppercase tracking-[0.2em] px-5 py-2.5 border border-zinc-800 hover:border-zinc-600 text-zinc-600 hover:text-white transition-colors">
+                            Reset
+                        </a>
+                    @endif
+                </div>
+            </form>
+        </div>
+    </section>
 
-            <div class="flex gap-3">
-                <x-button type="submit">Filter</x-button>
-                <x-link-button :href="route('products.index')" variant="ghost">Reset</x-link-button>
-            </div>
-        </form>
+    {{-- PRODUCT GRID --}}
+    <section class="bg-black py-12 min-h-[60vh]">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
-        <div class="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+            @if($search || $categorySlug)
+                <p class="font-mono text-xs text-zinc-600 uppercase tracking-widest mb-8">
+                    {{ $products->total() }} hasil
+                    @if($search) untuk "{{ $search }}"@endif
+                    @if($categorySlug) — {{ $categorySlug }}@endif
+                </p>
+            @endif
+
             @forelse ($products as $product)
-                <article class="flex flex-col border border-glass bg-ink shadow-sm">
-                    <a href="{{ route('products.show', $product) }}" class="block border-b border-glass bg-night">
+                @if($loop->first)
+                    <div class="grid grid-cols-2 lg:grid-cols-4 gap-px bg-zinc-900">
+                @endif
+
+                <article class="group bg-zinc-950 relative overflow-hidden flex flex-col">
+                    {{-- Image --}}
+                    <a href="{{ route('store.product', $product) }}" class="block relative overflow-hidden aspect-[3/4]">
                         @if ($product->image_path)
-                            <img src="{{ asset('storage/'.$product->image_path) }}" alt="{{ $product->name }}" class="aspect-[4/5] w-full object-cover">
+                            <img src="{{ asset('storage/'.$product->image_path) }}"
+                                 alt="{{ $product->name }}"
+                                 class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
                         @else
-                            <div class="flex aspect-[4/5] w-full items-center justify-center bg-[radial-gradient(circle_at_center,_rgba(225,29,72,0.22),_transparent_55%)]">
-                                <div class="h-20 w-20 rotate-45 border border-lens/60"></div>
+                            <div class="w-full h-full bg-gradient-to-br from-zinc-900 to-zinc-950 flex items-center justify-center group-hover:scale-105 transition-transform duration-500">
+                                <div class="w-16 h-16 rotate-45 border border-zinc-700 group-hover:border-rose-600 transition-colors"></div>
                             </div>
                         @endif
-                    </a>
 
-                    <div class="flex flex-1 flex-col gap-4 p-5">
-                        <div>
-                            <p class="font-mono text-xs uppercase tracking-[0.25em] text-lens">{{ $product->category?->name ?? 'Tanpa kategori' }}</p>
-                            <h2 class="mt-2 font-display text-2xl font-bold uppercase text-brass">{{ $product->name }}</h2>
-                            <p class="mt-2 line-clamp-3 text-sm leading-6 text-zinc-400">{{ $product->description }}</p>
+                        {{-- Badges --}}
+                        <div class="absolute top-3 left-3 flex flex-col gap-1 z-10">
+                            @if($product->stock === 0)
+                                <span class="font-mono text-[9px] uppercase tracking-widest px-2 py-1 bg-zinc-900/90 text-zinc-500">Habis</span>
+                            @elseif($product->stock <= 3)
+                                <span class="font-mono text-[9px] uppercase tracking-widest px-2 py-1 bg-rose-600/90 text-white">Sisa {{ $product->stock }}</span>
+                            @endif
                         </div>
 
-                        <div class="mt-auto flex items-center justify-between gap-4">
-                            <p class="font-mono text-lg font-bold text-lens">Rp {{ number_format((float) $product->price, 0, ',', '.') }}</p>
-                            <p class="font-mono text-xs uppercase tracking-[0.18em] {{ $product->stock > 0 ? 'text-zinc-400' : 'text-red-400' }}">
-                                {{ $product->stock > 0 ? 'Stok '.$product->stock : 'Habis' }}
-                            </p>
-                        </div>
-
-                        <div class="grid gap-3">
-                            <x-link-button :href="route('products.show', $product)" variant="secondary" class="w-full">Detail</x-link-button>
-
-                            @auth
-                                @if ($product->stock > 0)
+                        {{-- Quick action overlay --}}
+                        @auth
+                            @if($product->stock > 0)
+                                <div class="absolute inset-x-0 bottom-0 translate-y-full group-hover:translate-y-0 transition-transform duration-300 bg-black/90 p-4">
                                     <form method="POST" action="{{ route('cart.store') }}">
                                         @csrf
                                         <input type="hidden" name="product_id" value="{{ $product->id }}">
                                         <input type="hidden" name="quantity" value="1">
-                                        <x-button type="submit" class="w-full">Tambah Cart</x-button>
+                                        <button type="submit"
+                                                class="w-full font-cinzel text-[10px] uppercase tracking-[0.2em] py-2.5 text-white hover:text-rose-400 transition-colors text-center">
+                                            + Keranjang
+                                        </button>
                                     </form>
-                                @else
-                                    <x-button type="button" class="w-full" disabled>Stok Habis</x-button>
-                                @endif
-                            @else
-                                <x-link-button :href="route('login')" class="w-full">Login</x-link-button>
-                            @endauth
+                                </div>
+                            @endif
+                        @endauth
+                    </a>
+
+                    {{-- Info --}}
+                    <div class="p-4 border-t border-zinc-900 flex flex-col gap-3 flex-1">
+                        <div>
+                            @if($product->category)
+                                <p class="font-mono text-[9px] uppercase tracking-[0.25em] text-rose-400 mb-1">{{ $product->category->name }}</p>
+                            @endif
+                            <h2 class="font-cinzel text-sm uppercase tracking-[0.08em] text-white leading-snug">{{ $product->name }}</h2>
+                        </div>
+                        <div class="flex items-center justify-between mt-auto">
+                            <p class="font-mono text-sm text-zinc-300">Rp {{ number_format((float) $product->price, 0, ',', '.') }}</p>
+                            <a href="{{ route('store.product', $product) }}"
+                               class="font-mono text-[10px] uppercase tracking-widest text-zinc-600 hover:text-white transition-colors">
+                                Detail →
+                            </a>
                         </div>
                     </div>
                 </article>
+
+                @if($loop->last)
+                    </div>
+                @endif
+
             @empty
-                <div class="border border-dashed border-lens/50 bg-ink p-8 text-center sm:col-span-2 lg:col-span-3">
-                    <p class="font-display text-xl font-bold uppercase text-brass">Produk tidak ditemukan.</p>
-                    <p class="mt-2 text-sm text-zinc-400">Ubah kata kunci atau kategori untuk membuka katalog lain.</p>
+                <div class="text-center py-24 border border-dashed border-zinc-800">
+                    <p class="font-display text-3xl uppercase text-zinc-700 mb-3">Tidak Ditemukan</p>
+                    <p class="text-sm text-zinc-700">Coba ubah kata kunci atau reset filter.</p>
+                    @if($search || $categorySlug)
+                        <a href="{{ route('store.index') }}"
+                           class="inline-block mt-6 font-cinzel text-xs uppercase tracking-[0.2em] px-6 py-3 border border-zinc-800 hover:border-rose-600 text-zinc-600 hover:text-rose-400 transition-colors">
+                            Lihat Semua Produk
+                        </a>
+                    @endif
                 </div>
             @endforelse
-        </div>
 
-        <div class="mt-8">
-            {{ $products->links() }}
+            {{-- Pagination --}}
+            @if($products->hasPages())
+                <div class="mt-12 flex justify-center">
+                    {{ $products->links() }}
+                </div>
+            @endif
         </div>
-    </x-card>
-@endsection
+    </section>
+
+</x-layout>
