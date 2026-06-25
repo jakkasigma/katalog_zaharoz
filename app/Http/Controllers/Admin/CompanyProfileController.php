@@ -7,7 +7,6 @@ use App\Http\Requests\Admin\CompanyProfileRequest;
 use App\Http\Requests\Admin\PaymentInfoRequest;
 use App\Models\CompanyProfile;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\View\View;
 
 class CompanyProfileController extends Controller
@@ -40,16 +39,6 @@ class CompanyProfileController extends Controller
         }
 
         $validated = $request->validated();
-
-        if ($request->hasFile('logo')) {
-            if ($companyProfile->logo_path) {
-                Storage::disk('public')->delete($companyProfile->logo_path);
-            }
-
-            $validated['logo_path'] = $request->file('logo')->store('logos', 'public');
-        }
-
-        unset($validated['logo']);
 
         if ($request->hasFile('qris')) {
             if ($companyProfile->qris_path) {

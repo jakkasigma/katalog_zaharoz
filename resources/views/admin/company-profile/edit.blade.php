@@ -76,15 +76,6 @@
                     </div>
                 </div>
 
-                <div>
-                    <x-label for="logo">Logo</x-label>
-                    <x-input id="logo" type="file" name="logo" accept="image/*" />
-                    @if ($companyProfile->logo_path)
-                        <p class="mt-2 font-mono text-xs text-zinc-500">Logo saat ini: {{ $companyProfile->logo_path }}</p>
-                    @endif
-                    @error('logo') <p class="mt-1 text-sm text-red-400">{{ $message }}</p> @enderror
-                </div>
-
                 <x-button type="submit" class="w-fit">Simpan Company Profile</x-button>
             </div>
         </form>

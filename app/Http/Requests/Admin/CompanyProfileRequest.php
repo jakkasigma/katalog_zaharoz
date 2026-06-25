@@ -4,7 +4,6 @@ namespace App\Http\Requests\Admin;
 
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\Rules\File;
 
 class CompanyProfileRequest extends FormRequest
 {
@@ -30,7 +29,6 @@ class CompanyProfileRequest extends FormRequest
             'description' => ['nullable', 'string', 'max:3000'],
             'instagram_url' => ['nullable', 'url', 'max:255'],
             'tiktok_url' => ['nullable', 'url', 'max:255'],
-            'logo' => ['nullable', File::image()->max(2048)],
             'bank_name' => ['nullable', 'string', 'max:100'],
             'bank_account_number' => ['nullable', 'string', 'max:50'],
             'bank_account_name' => ['nullable', 'string', 'max:255'],
@@ -48,8 +46,6 @@ class CompanyProfileRequest extends FormRequest
             'email.required' => 'Email perusahaan wajib diisi.',
             'email.email' => 'Format email perusahaan tidak valid.',
             'phone.required' => 'Nomor telepon wajib diisi.',
-            'logo.image' => 'Logo harus berupa gambar.',
-            'logo.max' => 'Logo maksimal 2 MB.',
         ];
     }
 }

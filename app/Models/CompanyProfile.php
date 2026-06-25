@@ -19,7 +19,6 @@ class CompanyProfile extends Model
         'province',
         'postal_code',
         'description',
-        'logo_path',
         'instagram_url',
         'tiktok_url',
         'bank_name',
